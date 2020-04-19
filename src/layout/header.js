@@ -166,7 +166,7 @@ const Header = props => {
 
                       <i class="fas fa-check" />
                     </span>
-                    <span>Inscríbete</span>
+                    <span style={{ paddingLeft: "5px" }}>Inscríbete</span>
                   </Inscription>
                 </div>
               </div>
