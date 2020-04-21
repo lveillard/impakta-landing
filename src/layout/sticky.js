@@ -58,7 +58,7 @@ const Sticky = props => {
   return (
     <div className="box cta">
       <Features>
-        <div style={{ background: "#fff8bc", padding: "34px 0 0 0" }} />
+        <div className="prefeatureNav" style={{ padding: "34px 0 0 0" }} />
         <div className="featureNav">
           <a href={"/"} onClick={e => globalActions.details("match", e)}>
             <h2> 🎯 </h2>

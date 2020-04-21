@@ -2,6 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import "./styles.scss";
+import "./sass/_variables.scss"
+
+
 
 import Header from "./layout/header";
 import Footer from "./layout/footer";

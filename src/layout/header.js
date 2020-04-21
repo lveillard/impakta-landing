@@ -99,7 +99,7 @@ const Header = props => {
           <div className="hero-head">
             <Nav>
               <Logo>
-                <img src="logo.png" />
+                <img style={{ padding: "2px 0px 2px 15px" }} src="logoblack.svg" />
               </Logo>
               <Bar>
                 {" "}
