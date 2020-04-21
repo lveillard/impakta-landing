@@ -160,7 +160,7 @@ const Header = props => {
                     Encuentra el trabajo que mejor se adapta a tus skills y
                     gustos
                   </h2>
-                  <Inscription className="button is-warning ">
+                  <Inscription onClick={() => globalActions.setModal(true)} className="button is-warning ">
                     <span class="icon is-small">
                       <svg
                         style={{ fill: "#2867B2", background: "white" }}
@@ -174,7 +174,7 @@ const Header = props => {
 
                       <i class="fas fa-check" />
                     </span>
-                    <span onClick={() => globalActions.setModal(true)} style={{ paddingLeft: "5px" }}>Inscríbete</span>
+                    <span style={{ paddingLeft: "5px" }}>Inscríbete</span>
                   </Inscription>
 
                   <Modal closeOnBlur={true} show={globalState.modal} showClose={false} onClose={() => globalActions.setModal(false)} >

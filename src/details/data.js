@@ -68,7 +68,7 @@ const community = {
     {
       title: "Formación y mentores",
       content:
-        "Candidatos de generaciones anteriores mentorizan a los nuevos candidatos durante sus primeros meses..",
+        "Candidatos de generaciones anteriores mentorizan a los nuevos candidatos durante sus primeros meses.",
       image: "img/quality.svg"
     },
     {

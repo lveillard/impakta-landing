@@ -11,7 +11,7 @@ const initialState = {
 
 const actions = {
   setModal: (store, boolean) => {
-    store.setState({ modal: boolean });
+    store.setState({ modal: !store.state.modal });
 
   },
 
