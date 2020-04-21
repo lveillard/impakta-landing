@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import styled, { css } from "styled-components";
 import { useGlobal } from "../store/store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Modal, Section, Columns, Card, Content, Media, Image, Heading } from 'react-bulma-components';
 
 const Button = styled.span`
   color: black;
@@ -92,6 +93,7 @@ const Header = props => {
 
   const [globalState, globalActions] = useGlobal();
 
+
   return (
     <div>
       <div className="hero is-white">
@@ -103,11 +105,17 @@ const Header = props => {
               </Logo>
               <Bar>
                 {" "}
-                <Button> INSCRIPCIÓN </Button>
-                <Button second> INICIAR SESIÓN </Button>
+                <Button onClick={() => {
+                  globalActions.setModal(true)
+                }}> INSCRIPCIÓN </Button>
+                <Button second onClick={() => {
+                  globalActions.setModal(true)
+                }}> INICIAR SESIÓN </Button>
                 <Button
                   main
-                  onClick={() => globalActions.handleScroll("end", 42)}
+                  onClick={() => {
+                    globalActions.handleScroll("end", 42);
+                  }}
                 >
                   {" "}
                   <svg
@@ -166,15 +174,94 @@ const Header = props => {
 
                       <i class="fas fa-check" />
                     </span>
-                    <span style={{ paddingLeft: "5px" }}>Inscríbete</span>
+                    <span onClick={() => globalActions.setModal(true)} style={{ paddingLeft: "5px" }}>Inscríbete</span>
                   </Inscription>
+
+                  <Modal closeOnBlur={true} show={globalState.modal} showClose={false} onClose={() => globalActions.setModal(false)} >
+                    <Modal.Content>
+                      <Section style={{ backgroundColor: 'white' }}>
+                        <Heading > En construcción </Heading>
+                        <Image src={"img/building.svg"} alt="IA" />
+
+
+                        Estamos construyendo el sistema de login usando linkedin...
+
+                        {/* 
+                        
+                        <Columns>
+                          <Columns.Column>
+                            <Card className="is-shady">
+                              <Card.Image size="3by2" src="http://bulma.io/images/placeholders/1280x960.png" />
+                              <Card.Content>
+                                <Media  >
+                                  <Media.Item renderAs="figure" position="left">
+                                  </Media.Item>
+                                  <Media.Item style={{ overflow: "hidden" }}>
+                                    <Heading size={5}>Programa EMPATYA</Heading>
+                                  </Media.Item>
+                                </Media>
+                                <Content>
+                                  Te ayudamos a construir un CV y acercamos tu currículum a cientos de empresas de tu sector.
+                                  <a> #formación</a>
+                                  <br />
+                                </Content>
+                              </Card.Content>
+                            </Card>
+                          </Columns.Column>
+
+                          <Columns.Column>
+                            <Card className="is-shady">
+                              <Card.Image size="3by2" src="http://bulma.io/images/placeholders/1280x960.png" />
+                              <Card.Content>
+                                <Media >
+                                  <Media.Item renderAs="figure" position="left">
+                                  </Media.Item>
+                                  <Media.Item style={{ overflow: "hidden" }}>
+                                    <Heading size={5}>Programa OLIGYA</Heading>
+                                  </Media.Item>
+                                </Media>
+                                <Content>
+                                  Participa en el concurso de talento OLIGYA y entra a formar parte de una de nuestras start-up y scale-up asociadas. <a>#concurso</a>
+                                  <br />
+                                </Content>
+                              </Card.Content>
+                            </Card>
+                          </Columns.Column>
+
+                          <Columns.Column>
+                            <Card className="is-shady">
+                              <Card.Image size="3by2" src="http://bulma.io/images/placeholders/1280x960.png" />
+                              <Card.Content>
+                                <Media  >
+                                  <Media.Item renderAs="figure" position="left">
+                                  </Media.Item>
+                                  <Media.Item style={{ overflow: "hidden" }}>
+                                    <Heading size={5}>Programa LAUNCH.IA</Heading>
+                                  </Media.Item>
+                                </Media>
+                                <Content>
+                                  ¿Tienes una idea y no sabes por dónde empezar? <a>#preincubadora</a>.
+                                </Content>
+                              </Card.Content>
+                            </Card>
+                          </Columns.Column>
+                        </Columns>
+                        
+                        */}
+
+
+                      </Section>
+                    </Modal.Content>
+                  </Modal>
+
+
                 </div>
               </div>
             </div>
           </div>
         </section>
       </div>
-    </div>
+    </div >
   );
 };
 

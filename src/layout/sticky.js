@@ -8,7 +8,7 @@ const Features = styled.div`
   border-bottom: 2px solid #ffe923;
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 1;
   .featureNav {
     width: 80%;
     @media (max-width: 600px) {

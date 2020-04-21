@@ -5,10 +5,16 @@ import useGlobalHook from "use-global-hook";
 const initialState = {
   text: "null",
   details: "match",
-  boxed: true
+  boxed: true,
+  modal: undefined,
 };
 
 const actions = {
+  setModal: (store, boolean) => {
+    store.setState({ modal: boolean });
+
+  },
+
   changeVersion: store => {
     console.log(store.state);
 
