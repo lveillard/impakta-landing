@@ -2,7 +2,15 @@ import React, { useState, useEffect, useContext } from "react";
 import styled, { css } from "styled-components";
 import { useGlobal } from "../store/store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Modal, Section, Columns, Card, Content, Media, Image, Heading } from 'react-bulma-components';
+import { Modal } from 'react-bulma-components';
+
+
+import { Field, Control, Label, Input, Textarea, Select, Checkbox, Radio, Help, InputFile } from 'react-bulma-components/lib/components/form';
+
+
+import Login from "./login"
+import Working from "./working"
+
 
 const Button = styled.span`
   color: black;
@@ -106,10 +114,10 @@ const Header = props => {
               <Bar>
                 {" "}
                 <Button onClick={() => {
-                  globalActions.setModal(true)
+                  globalActions.setModal("working")
                 }}> INSCRIPCIÓN </Button>
                 <Button second onClick={() => {
-                  globalActions.setModal(true)
+                  globalActions.setModal("working")
                 }}> INICIAR SESIÓN </Button>
                 <Button
                   main
@@ -133,8 +141,9 @@ const Header = props => {
             </Nav>
           </div>
           <div className="">
+
             <div
-              class="hero-body columns is-vcentered"
+              className="hero-body columns is-vcentered"
               style={{
                 marginTop: "auto",
                 marginBottom: "auto",
@@ -144,7 +153,7 @@ const Header = props => {
                 flexDirection: "row-reverse"
               }}
             >
-              <div class="column">
+              <div className="column">
                 <IMG
                   src="candidata2.svg"
                   width="auto"
@@ -152,7 +161,7 @@ const Header = props => {
                   alt="illustration"
                 />
               </div>
-              <div class="column">
+              <div className="column">
                 {" "}
                 <div className="container has-text-centered">
                   <h1 className="title ">MAXIMIZA TU IMPACTO</h1>
@@ -160,8 +169,8 @@ const Header = props => {
                     Encuentra el trabajo que mejor se adapta a tus skills y
                     gustos
                   </h2>
-                  <Inscription onClick={() => globalActions.setModal(true)} className="button is-warning ">
-                    <span class="icon is-small">
+                  <Inscription onClick={() => globalActions.setModal("login")} className="button is-warning ">
+                    <span className="icon is-small">
                       <svg
                         style={{ fill: "#2867B2", background: "white" }}
                         xmlns="http://www.w3.org/2000/svg"
@@ -172,21 +181,23 @@ const Header = props => {
                         <path d="M0 0v24h24v-24h-24zm8 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.397-2.586 7-2.777 7 2.476v6.759z" />
                       </svg>
 
-                      <i class="fas fa-check" />
+                      <i className="fas fa-check" />
                     </span>
                     <span style={{ paddingLeft: "5px" }}>Inscríbete</span>
                   </Inscription>
 
-                  <Modal closeOnBlur={true} show={globalState.modal} showClose={false} onClose={() => globalActions.setModal(false)} >
-                    <Modal.Content>
-                      <Section style={{ backgroundColor: 'white' }}>
-                        <Heading > En construcción </Heading>
-                        <Image src={"img/building.svg"} alt="IA" />
+                  <Modal closeOnBlur={true} show={globalState.modal.login || false} showClose={false} onClose={() => globalActions.setModal("login")} >
+                    <Modal.Content style={{ overflow: "hidden" }} >
+                      <Login text="Estamos construyendo el sistema de login usando linkedin!..." />
+                    </Modal.Content>
+                  </Modal>
+
+                  <Modal closeOnBlur={true} show={globalState.modal.working || false} showClose={false} onClose={() => globalActions.setModal("working")} >
+                    <Modal.Content style={{ overflow: "hidden" }} >
+                      <Working text="Estamos construyendo el sistema de login usando linkedin..." />
 
 
-                        Estamos construyendo el sistema de login usando linkedin...
-
-                        {/* 
+                      {/* 
                         
                         <Columns>
                           <Columns.Column>
@@ -250,7 +261,6 @@ const Header = props => {
                         */}
 
 
-                      </Section>
                     </Modal.Content>
                   </Modal>
 

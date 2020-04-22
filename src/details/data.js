@@ -34,14 +34,17 @@ const impact = {
     {
       title: "Centrado en candidato",
       content:
-        "Nuestro proceso esta centrado en el candidato. <br /> <br /> Las empresas que no cumplen con nuestros requisitos son descartadas.",
-      image: "img/powerful.svg"
+        "<li> Nuestro proceso esta centrado en el candidato. </li> <li> Las empresas que no cumplen con nuestros requisitos son descartadas.</li>",
+      image: "img/powerful.svg",
+      contentType: "html"
+
     },
     {
       title: "Con un propósito",
       content:
-        "Sólo aceptamos empresas modernas y start-ups con un producto o servicio de calidad con un propósito claro. <br /> <br /> Además, si lo deseas puedes decidir participar sólo en  procesos para empresas con un objetivo ecólogico o social.",
-      image: "img/barriers.svg"
+        "<li> Sólo aceptamos empresas modernas y start-ups con un producto o servicio de calidad con un propósito claro. </li> <li> Además, si lo deseas puedes decidir participar sólo en  procesos para empresas con un objetivo ecólogico o social.</li> ",
+      image: "img/barriers.svg",
+      contentType: "html"
     },
     {
       title: "Cultura de start-up ",

@@ -6,12 +6,18 @@ const initialState = {
   text: "null",
   details: "match",
   boxed: true,
-  modal: undefined,
+  modal: { working: false, login: false },
 };
 
 const actions = {
-  setModal: (store, boolean) => {
-    store.setState({ modal: !store.state.modal });
+  setModal: (store, modale) => {
+    console.log(store.state);
+
+    // if we want to keep the rest of the modals open
+    //store.setState({ modal: { ...store.state.modal, [modale]: !store.state.modal[modale] } });
+
+    // but truth is that we want to put all them to false
+    store.setState({ modal: { [modale]: !store.state.modal[modale] } });
 
   },
 

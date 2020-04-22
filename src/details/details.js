@@ -156,56 +156,60 @@ const Details = props => {
           </section>
         </Wrapper>
       ) : (
-        <div
-          className="container"
-          style={{ marginTop: "50px", marginBottom: "50px", maxWidth: "98%" }}
-        >
-          <Columns
-            className="columns is-multiline is-gapless"
-            style={{ margin: "0px" }}
+          <div
+            className="container"
+            style={{ marginTop: "50px", marginBottom: "50px", maxWidth: "98%" }}
           >
-            {globalState.details &&
-              candidato[globalState.details].type === "horizontal" &&
-              candidato[globalState.details].items.map(x => (
-                <div key={x.title} className="column ">
-                  <div className="card is-shady" style={{ height: "100%" }}>
-                    <div className=" has-text-centered" />
-                    {x.image && (
-                      <div>
-                        <IMG src={x.image} alt="error" />
-                      </div>
-                    )}
-                    <div className=" card-content">
-                      <div className=" content">
-                        <h4> {x.title} </h4>
-                        <Des>{x.content}</Des>
-                        <p>
-                          <a href="#">Learn more</a>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-
-            {globalState.details &&
-              candidato[globalState.details].type === "vertical" && (
-                <div className="card is-shady" style={{ width: "100%" }}>
-                  {candidato[globalState.details].items.map(x => (
-                    <div key={x.title} className="column ">
+            <Columns
+              className="columns is-multiline is-gapless"
+              style={{ margin: "0px" }}
+            >
+              {globalState.details &&
+                candidato[globalState.details].type === "horizontal" &&
+                candidato[globalState.details].items.map(x => (
+                  <div key={x.title} className="column ">
+                    <div className="card is-shady" style={{ height: "100%" }}>
+                      <div className=" has-text-centered" />
+                      {x.image && (
+                        <div>
+                          <IMG src={x.image} alt="error" />
+                        </div>
+                      )}
                       <div className=" card-content">
                         <div className=" content">
                           <h4> {x.title} </h4>
-                          <Des>{x.content}</Des>
+                          {x.contentType === "html" ?
+                            <Des dangerouslySetInnerHTML={{ __html: x.content }}></Des>
+                            :
+                            <Des > <li> {x.content}</li>  </Des>
+                          }
+                          <p>
+                            <a href="#">Learn more</a>
+                          </p>
                         </div>
                       </div>
                     </div>
-                  ))}
-                </div>
-              )}
-          </Columns>
-        </div>
-      )}
+                  </div>
+                ))}
+
+              {globalState.details &&
+                candidato[globalState.details].type === "vertical" && (
+                  <div className="card is-shady" style={{ width: "100%" }}>
+                    {candidato[globalState.details].items.map(x => (
+                      <div key={x.title} className="column ">
+                        <div className=" card-content">
+                          <div className=" content">
+                            <h4> {x.title} </h4>
+                            <Des> {x.content}</Des>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+            </Columns>
+          </div>
+        )}
     </React.Fragment>
   );
 };

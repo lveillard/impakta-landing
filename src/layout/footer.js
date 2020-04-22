@@ -6,10 +6,10 @@ const Footer = props => {
   const [globalState, globalActions] = useGlobal();
 
   return (
-    <footer class="footer">
-      <div class="container">
-        <div class="columns">
-          <div class="column is-3 is-offset-2">
+    <footer className="footer">
+      <div className="container">
+        <div className="columns">
+          <div className="column is-3 is-offset-2">
             <h2>
               <strong>Category</strong>
             </h2>
@@ -22,7 +22,7 @@ const Footer = props => {
               </li>
             </ul>
           </div>
-          <div class="column is-3">
+          <div className="column is-3">
             <h2>
               <strong>Category</strong>
             </h2>
@@ -35,7 +35,7 @@ const Footer = props => {
               </li>
             </ul>
           </div>
-          <div class="column is-4">
+          <div className="column is-4">
             <h2>
               <strong>Category</strong>
             </h2>
@@ -49,20 +49,20 @@ const Footer = props => {
             </ul>
           </div>
         </div>
-        <div class="content has-text-centered">
+        <div className="content has-text-centered">
           <p>
             <a
-              class="icon"
+              className="icon"
               href="https://github.com/BulmaTemplates/bulma-templates"
             >
-              <i class="fa fa-github" />
+              <i className="fa fa-github" />
             </a>
           </p>
-          <div class="control level-item">
+          <div className="control level-item">
             <a href="https://github.com/BulmaTemplates/bulma-templates">
-              <div class="tags has-addons">
-                <span class="tag is-dark">Impaktia</span>
-                <span class="tag is-info">Recruiting</span>
+              <div className="tags has-addons">
+                <span className="tag is-dark">Impaktia</span>
+                <span className="tag is-info">Recruiting</span>
               </div>
             </a>
           </div>
