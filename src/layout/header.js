@@ -4,10 +4,6 @@ import { useGlobal } from "../store/store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Modal } from 'react-bulma-components';
 
-
-import { Field, Control, Label, Input, Textarea, Select, Checkbox, Radio, Help, InputFile } from 'react-bulma-components/lib/components/form';
-
-
 import Login from "./login"
 import Working from "./working"
 
@@ -50,7 +46,7 @@ const Nav = styled.nav`
   top: 0px;
   left: 0px;
   width: 100%;
-  z-index: 9998;
+  z-index: 2;
   display: flex;
   font-family: "Roboto", sans-serif;
   -webkit-box-pack: justify;
@@ -117,7 +113,7 @@ const Header = props => {
                   globalActions.setModal("working")
                 }}> INSCRIPCIÓN </Button>
                 <Button second onClick={() => {
-                  globalActions.setModal("working")
+                  globalActions.setModal("login")
                 }}> INICIAR SESIÓN </Button>
                 <Button
                   main

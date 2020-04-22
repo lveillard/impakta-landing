@@ -6,10 +6,16 @@ const initialState = {
   text: "null",
   details: "match",
   boxed: true,
+  status: "",
   modal: { working: false, login: false },
 };
 
 const actions = {
+
+  setStatus: (store, value) => {
+    store.setState({ status: value })
+  },
+
   setModal: (store, modale) => {
     console.log(store.state);
 

@@ -123,7 +123,24 @@ background: $lyellow;
       }
   }
 }
+.login input:focus {
+  border-color: #ffd44a;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+}
 
+.login input:hover {
+  border-color: #ffd44a;
+  
+}
+
+.login button:hover {
+  border-color: #ffd666;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+}
+
+.Toastify__toast--error {
+  background: #ffa477 !important;
+}
 
 /*adds font awesome stars*/
 footer li:before {
