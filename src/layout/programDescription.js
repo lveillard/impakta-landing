@@ -224,7 +224,7 @@ const ProgramDescription = (props) => {
   return (
     <React.Fragment>
       <Header />
-      <content
+      <div
         className="main "
         style={{ paddingLeft: "60px", paddingRight: "60px" }}
       >
@@ -327,7 +327,7 @@ const ProgramDescription = (props) => {
               ))}
           </Columns>
         </Container>
-      </content>
+      </div>
     </React.Fragment>
   );
 };
