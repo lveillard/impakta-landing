@@ -130,6 +130,7 @@ export const programs = {
         "Te ayudamos a construir un CV y acercamos tu currículum a cientos de empresas de tu sector. #formación",
       image: "img/resume.svg",
       buttonColor: "#2870ff",
+      id: 1,
     },
     {
       title: "Programa OLIG.IA",
@@ -137,12 +138,14 @@ export const programs = {
         "Participa en el concurso de talento OLIGYA y entra a formar parte de una de nuestras start-up y scale-up asociadas. #concurso",
       image: "img/hire.svg",
       buttonColor: "#fff067",
+      id: 2,
     },
     {
       title: "Programa LAUNCHYA",
       content: "¿Tienes una idea y no sabes por dónde empezar? #preincubadora",
       image: "img/idea.svg",
       buttonColor: "#c9009d",
+      id: 3,
     },
   ],
 };

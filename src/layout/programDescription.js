@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 
 import { useGlobal } from "../store/store";
 
@@ -36,6 +36,7 @@ const Column = styled.div`
   flex-shrink: 1;
   margin-left: 10px;
   margin-right: 10px;
+
   ${(props) =>
     props.center &&
     css`
@@ -83,8 +84,12 @@ const ButtonBot = styled.div`
 
 const Carta = styled.div`
   cursor: pointer;
+
   &:hover {
-    background: ${(props) => props.color + "11"};
+    background-color: ${(props) => props.color + "11"};
+  }
+  @media (min-width: 1100px) {
+    max-height: calc(100vh - 110px);
   }
 `;
 
@@ -95,7 +100,7 @@ const Des = styled.p`
 
 const IMG = styled.img`
   max-width: 75%;
-  max-height: 90%;
+  max-height: 30vh;
 
   display: block;
   margin: 25px auto 0px auto;
@@ -103,10 +108,12 @@ const IMG = styled.img`
 
   @media (min-width: 700px) {
     max-width: 50%;
+    max-height: 90%;
   }
 
   @media (min-width: 1100px) {
     max-width: 92%;
+    max-height: 90%;
   }
 `;
 
@@ -122,12 +129,65 @@ const HeaderC = styled.div`
   }
 `;
 
+const Container = styled.div`
+  max-width: 650px;
+
+  @media (min-width: 700px) {
+    max-width: 900px;
+  }
+
+  @media (min-width: 1100px) {
+    max-width: 1200px;
+    max-height: calc(100vh - 110px);
+  }
+`;
+
 const ProgramDescription = (props) => {
   const [globalState, globalActions] = useGlobal();
 
-  const [size, setSize] = useState("");
+  const [current, setCurrent] = useState(null);
+  const [currentRemoved, setCurrentRemoved] = useState(null);
 
-  useEffect(() => {});
+  const [remover, setRemover] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+
+  const currentRemover = (id) => {
+    console.log("remover");
+    setLoading(true);
+    setCurrent(null);
+    setCurrentRemoved(id);
+    setRemover(false);
+
+    setTimeout(() => {
+      setLoading(false);
+      setCurrentRemoved(null);
+    }, 1000);
+
+    /*setLoading(true);
+
+    setTimeout(() => {
+      setCurrent(null);
+    }, 500);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 600);*/
+  };
+  const escFunction = useCallback((event) => {
+    if (event.keyCode === 27) {
+      currentRemover();
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, []);
+
   return (
     <React.Fragment>
       <Header />
@@ -135,13 +195,11 @@ const ProgramDescription = (props) => {
         className="main "
         style={{ paddingLeft: "60px", paddingRight: "60px" }}
       >
-        <div
+        <Container
           className="container"
           style={{
             marginTop: "50px",
             marginBottom: "50px",
-            maxWidth: "1200px",
-            minHeight: "83vh",
             flexDirection: "column",
             display: "flex",
             justifyContent: "center",
@@ -150,57 +208,109 @@ const ProgramDescription = (props) => {
           <Columns className="columns is-multiline" style={{ margin: "0px" }}>
             {globalState.details &&
               programs.items.map((x) => (
-                <div
-                  style={{
-                    flexGrow: "1",
-                    transition: "all 400ms ease-in-out",
-                  }}
-                  key={x.title + size}
-                  className="column "
-                >
-                  <Carta
-                    color={x.buttonColor}
-                    className="card is-shady"
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      height: "100%",
-                    }}
-                  >
-                    <HeaderC style={{}} className="  has-text-centered">
-                      {" "}
-                      {x.image && <IMG src={x.image} alt="error" />}
-                    </HeaderC>
-
-                    <div className=" card-content" style={{ flex: "auto" }}>
-                      <div className=" content">
-                        <Heading size={5} style={{}}>
-                          {" "}
-                          {x.title}{" "}
-                        </Heading>
-                        {x.contentType === "html" ? (
-                          <Des
-                            dangerouslySetInnerHTML={{ __html: x.content }}
-                          ></Des>
-                        ) : (
-                          <Des> {x.content} </Des>
-                        )}{" "}
-                      </div>{" "}
-                    </div>
-
-                    <div class="cardFooter">
-                      <ButtonBot
-                        className="button is-fullwidth"
+                <React.Fragment>
+                  {(x.id === current || !remover) && (
+                    <div
+                      className="column "
+                      style={{
+                        flexGrow: "1",
+                        //maxWidth: loading && current !== x.id && "200px",
+                        transition:
+                          "opacity 800ms, flex-basis 1000ms ease-in-out, max-width 500ms ease-in-out 500ms",
+                        flexBasis: current === x.id && "75%",
+                        //opacity: loading && 0,
+                        opacity: current === null ? 1 : current !== x.id && 0,
+                      }}
+                      order={x.id == 3 && 1}
+                      key={x.title}
+                    >
+                      <Carta
                         color={x.buttonColor}
+                        onClick={() => {
+                          if (current !== x.id) {
+                            console.log("loader");
+
+                            // empezamos de cero
+                            setLoading(false);
+
+                            // seleccionamos el que queremos
+                            setCurrent(x.id);
+
+                            // despues de 300 msegundos empezamos a quitar cosas
+
+                            setTimeout(() => {
+                              setLoading(true);
+                            }, 200);
+
+                            //despues de 800 msegundos nos lo cargamos todo
+                            setTimeout(() => {
+                              setRemover(true);
+                              globalActions.handleScroll("top", 0);
+                            }, 600);
+
+                            // despues de 1s ya solo queda el seleccionado
+                            setTimeout(() => {
+                              setLoading(false);
+                            }, 1000);
+                          } else {
+                            currentRemover(x.id);
+                          }
+                        }}
+                        className="card is-shady"
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          height: "100%",
+                        }}
                       >
-                        <b> {x.title}</b>
-                      </ButtonBot>{" "}
+                        <HeaderC style={{}} className="has-text-centered">
+                          {x.image && <IMG src={x.image} alt="error" />}
+                        </HeaderC>
+
+                        {(!loading ||
+                          x.id === current ||
+                          x.id === currentRemoved) && (
+                          <div
+                            className=" card-content"
+                            style={{ flex: "auto" }}
+                          >
+                            <div className=" content">
+                              <Heading size={5} style={{}}>
+                                {" "}
+                                {current}
+                                {x.title}{" "}
+                              </Heading>
+                              {x.contentType === "html" ? (
+                                <Des
+                                  dangerouslySetInnerHTML={{
+                                    __html: x.content,
+                                  }}
+                                ></Des>
+                              ) : (
+                                <Des> {x.content} </Des>
+                              )}{" "}
+                            </div>{" "}
+                          </div>
+                        )}
+                        {(!loading ||
+                          x.id === current ||
+                          x.id === currentRemoved) && (
+                          <div className="cardFooter">
+                            <ButtonBot
+                              className="button is-fullwidth"
+                              color={x.buttonColor}
+                            >
+                              <b> {x.title}</b>
+                            </ButtonBot>{" "}
+                          </div>
+                        )}
+                      </Carta>
                     </div>
-                  </Carta>
-                </div>
+                  )}
+                </React.Fragment>
               ))}
           </Columns>
-        </div>
+        </Container>
       </content>
     </React.Fragment>
   );

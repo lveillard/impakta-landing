@@ -4,6 +4,7 @@ import useGlobalHook from "use-global-hook";
 
 const initialState = {
   text: "null",
+  program: 1,
   details: "match",
   boxed: true,
   status: "",
