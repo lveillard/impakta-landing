@@ -125,10 +125,13 @@ const HeaderC = styled.div`
 const ProgramDescription = (props) => {
   const [globalState, globalActions] = useGlobal();
 
+  const [size, setSize] = useState("");
+
+  useEffect(() => {});
   return (
     <React.Fragment>
       <Header />
-      <section
+      <content
         className="main "
         style={{ paddingLeft: "60px", paddingRight: "60px" }}
       >
@@ -147,7 +150,14 @@ const ProgramDescription = (props) => {
           <Columns className="columns is-multiline" style={{ margin: "0px" }}>
             {globalState.details &&
               programs.items.map((x) => (
-                <div key={x.title} className="column ">
+                <div
+                  style={{
+                    flexGrow: "1",
+                    transition: "all 400ms ease-in-out",
+                  }}
+                  key={x.title + size}
+                  className="column "
+                >
                   <Carta
                     color={x.buttonColor}
                     className="card is-shady"
@@ -191,7 +201,7 @@ const ProgramDescription = (props) => {
               ))}
           </Columns>
         </div>
-      </section>
+      </content>
     </React.Fragment>
   );
 };
