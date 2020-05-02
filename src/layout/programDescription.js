@@ -153,6 +153,34 @@ const ProgramDescription = (props) => {
 
   const [loading, setLoading] = useState(false);
 
+  const currentAdder = (id) => {
+    // empezamos de cero
+    setLoading(false);
+
+    setClickBlocker(true);
+
+    // seleccionamos el que queremos
+    setCurrent(id);
+
+    // despues de 300 msegundos empezamos a quitar cosas
+
+    setTimeout(() => {
+      setLoading(true);
+      globalActions.handleScroll("top", 0);
+    }, 500);
+
+    //despues de 800 msegundos nos lo cargamos todo
+    setTimeout(() => {
+      setRemover(true);
+    }, 600);
+
+    // despues de 1s ya solo queda el seleccionado
+    setTimeout(() => {
+      setLoading(false);
+      setClickBlocker(false);
+    }, 800);
+  };
+
   const currentRemover = (id) => {
     console.log("remover");
     setLoading(true);
@@ -239,31 +267,7 @@ const ProgramDescription = (props) => {
                         onClick={() => {
                           if (clickBlocker === true) {
                           } else if (current !== x.id) {
-                            // empezamos de cero
-                            setLoading(false);
-
-                            setClickBlocker(true);
-
-                            // seleccionamos el que queremos
-                            setCurrent(x.id);
-
-                            // despues de 300 msegundos empezamos a quitar cosas
-
-                            setTimeout(() => {
-                              setLoading(true);
-                              globalActions.handleScroll("top", 0);
-                            }, 500);
-
-                            //despues de 800 msegundos nos lo cargamos todo
-                            setTimeout(() => {
-                              setRemover(true);
-                            }, 600);
-
-                            // despues de 1s ya solo queda el seleccionado
-                            setTimeout(() => {
-                              setLoading(false);
-                              setClickBlocker(false);
-                            }, 800);
+                            currentAdder(x.id);
                           } else {
                             currentRemover(x.id);
                           }

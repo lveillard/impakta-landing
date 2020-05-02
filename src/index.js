@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import "normalize.css";
+
 import "./styles.scss";
 import "react-toastify/dist/ReactToastify.min.css";
 
