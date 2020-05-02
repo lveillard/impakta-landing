@@ -18,6 +18,7 @@ const Wrapper = styled.section`
 
 const Columns = styled.div`
   display: flex;
+  width: 100%;
   @media (max-width: 1100px) {
     flex-direction: column;
     text-align: center;
@@ -224,10 +225,7 @@ const ProgramDescription = (props) => {
   return (
     <React.Fragment>
       <Header />
-      <div
-        className="main "
-        style={{ paddingLeft: "60px", paddingRight: "60px" }}
-      >
+      <div className="main " style={{ width: "100%" }}>
         <Container
           className="container"
           style={{
