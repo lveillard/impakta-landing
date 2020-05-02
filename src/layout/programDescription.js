@@ -149,6 +149,7 @@ const ProgramDescription = (props) => {
   const [currentRemoved, setCurrentRemoved] = useState(null);
 
   const [remover, setRemover] = useState(false);
+  const [clickBlocker, setClickBlocker] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -156,17 +157,21 @@ const ProgramDescription = (props) => {
     console.log("remover");
     setLoading(true);
     setCurrent(null);
+
+    setClickBlocker(true);
+
     setCurrentRemoved(id);
     setRemover(false);
 
     setTimeout(() => {
       setLoading(false);
       setCurrentRemoved(null);
-    }, 1000);
+      setClickBlocker(false);
+    }, 500);
 
     /*setLoading(true);
 
-    setTimeout(() => {
+    setTimeout(() => 
       setCurrent(null);
     }, 500);
 
@@ -216,10 +221,15 @@ const ProgramDescription = (props) => {
                         flexGrow: "1",
                         //maxWidth: loading && current !== x.id && "200px",
                         transition:
-                          "opacity 800ms, flex-basis 1000ms ease-in-out, max-width 500ms ease-in-out 500ms",
+                          "opacity 600ms, flex-basis 1000ms ease-in-out, max-width 500ms ease-in-out 500ms",
                         flexBasis: current === x.id && "75%",
                         //opacity: loading && 0,
-                        opacity: current === null ? 1 : current !== x.id && 0,
+                        opacity:
+                          currentRemoved !== null
+                            ? currentRemoved !== x.id && 0.2
+                            : current === null
+                            ? 1
+                            : current !== x.id && 0.2,
                       }}
                       order={x.id == 3 && 1}
                       key={x.title}
@@ -227,11 +237,12 @@ const ProgramDescription = (props) => {
                       <Carta
                         color={x.buttonColor}
                         onClick={() => {
-                          if (current !== x.id) {
-                            console.log("loader");
-
+                          if (clickBlocker === true) {
+                          } else if (current !== x.id) {
                             // empezamos de cero
                             setLoading(false);
+
+                            setClickBlocker(true);
 
                             // seleccionamos el que queremos
                             setCurrent(x.id);
@@ -240,24 +251,27 @@ const ProgramDescription = (props) => {
 
                             setTimeout(() => {
                               setLoading(true);
-                            }, 200);
+                              globalActions.handleScroll("top", 0);
+                            }, 500);
 
                             //despues de 800 msegundos nos lo cargamos todo
                             setTimeout(() => {
                               setRemover(true);
-                              globalActions.handleScroll("top", 0);
                             }, 600);
 
                             // despues de 1s ya solo queda el seleccionado
                             setTimeout(() => {
                               setLoading(false);
-                            }, 1000);
+                              setClickBlocker(false);
+                            }, 800);
                           } else {
                             currentRemover(x.id);
                           }
                         }}
                         className="card is-shady"
                         style={{
+                          cursor: clickBlocker && "default",
+
                           display: "flex",
                           flexDirection: "column",
                           height: "100%",
@@ -275,10 +289,8 @@ const ProgramDescription = (props) => {
                             style={{ flex: "auto" }}
                           >
                             <div className=" content">
-                              <Heading size={5} style={{}}>
-                                {" "}
-                                {current}
-                                {x.title}{" "}
+                              <Heading size={5} style={{ textAlign: "center" }}>
+                                {x.title}
                               </Heading>
                               {x.contentType === "html" ? (
                                 <Des
