@@ -2,11 +2,17 @@ import React, { useState, useEffect, useContext } from "react";
 
 import { useGlobal } from "../store/store";
 
-const Footer = props => {
+const Footer = (props) => {
   const [globalState, globalActions] = useGlobal();
 
   return (
-    <footer className="footer">
+    <footer
+      style={{
+        background:
+          "linear-gradient(185deg, rgba(255,240,103,1) 0%, rgba(255,240,105,1) 6%, rgba(255,241,110,1) 13%, rgba(255,248,188,1) 100%)",
+      }}
+      className="footer"
+    >
       <div className="container">
         <div className="columns">
           <div className="column is-3 is-offset-2">

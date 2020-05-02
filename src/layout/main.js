@@ -3,16 +3,11 @@ import React, { useState, useEffect, useContext } from "react";
 import { useGlobal } from "../store/store";
 import Details from "../details/details";
 
-
-
-const Main = props => {
+const Main = (props) => {
   const [globalState, globalActions] = useGlobal();
 
   return (
     <div className="main">
-
-
-      {" "}
       {/*
       <button
         onClick={() => globalActions.changeVersion()}

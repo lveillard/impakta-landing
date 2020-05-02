@@ -8,12 +8,27 @@ const initialState = {
   boxed: true,
   status: "",
   modal: { working: false, login: false },
+  popup: "popcita",
+  auth: { facebook: null },
 };
 
 const actions = {
+  setAuthProp: (store, object) => {
+    const oldValue = store.state.auth;
+    const newValue = { ...oldValue, ...object };
+    store.setState({ auth: newValue });
+    console.log(store.state);
+  },
+
+  setPopup: (store, pop) => {
+    console.log("pop", pop);
+    console.log(store.state.popup);
+    store.setState({ popup: pop });
+    console.log(store.state.popup);
+  },
 
   setStatus: (store, value) => {
-    store.setState({ status: value })
+    store.setState({ status: value });
   },
 
   setModal: (store, modale) => {
@@ -24,10 +39,9 @@ const actions = {
 
     // but truth is that we want to put all them to false
     store.setState({ modal: { [modale]: !store.state.modal[modale] } });
-
   },
 
-  changeVersion: store => {
+  changeVersion: (store) => {
     console.log(store.state);
 
     store.setState({ boxed: !store.state.boxed });
@@ -47,16 +61,16 @@ const actions = {
   },
 
   increaseTimer: (store, id) => {
-    const oldValue = store.state.tasks.find(x => x.id === id);
+    const oldValue = store.state.tasks.find((x) => x.id === id);
     const newValue = { ...oldValue, time: oldValue.time + 1 };
     const indexOldElement = store.state.tasks.findIndex(
       ({ id }) => id === newValue.id
     );
     const newArray = Object.assign([...store.state.tasks], {
-      [indexOldElement]: newValue
+      [indexOldElement]: newValue,
     });
     store.setState({ tasks: newArray });
-  }
+  },
 };
 
 export const useGlobal = useGlobalHook(React, initialState, actions);

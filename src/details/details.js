@@ -17,7 +17,7 @@ const Columns = styled.div`
     flex-direction: column;
     text-align: center;
   }
-  ${props =>
+  ${(props) =>
     props.aligned &&
     css`
       align-items: baseline;
@@ -31,14 +31,14 @@ const Column = styled.div`
   flex-shrink: 1;
   margin-left: 10px;
   margin-right: 10px;
-  ${props =>
+  ${(props) =>
     props.center &&
     css`
       align-items: center;
       display: flex;
     `}
 
-  ${props =>
+  ${(props) =>
     props.top &&
     css`
       margin-top: 8vh;
@@ -74,11 +74,12 @@ const IMG = styled.img`
   }
 `;
 
-const Details = props => {
+const Details = (props) => {
   const [globalState, globalActions] = useGlobal();
 
   return (
     <React.Fragment>
+      {console.log(globalState)}
       {!globalState.boxed ? (
         <Wrapper className="hero is-white">
           {" "}
@@ -87,7 +88,7 @@ const Details = props => {
               className="hero-body columns "
               style={{
                 marginTop: "auto",
-                marginBottom: "auto"
+                marginBottom: "auto",
               }}
             >
               <Columns className="holi" align>
@@ -156,60 +157,67 @@ const Details = props => {
           </section>
         </Wrapper>
       ) : (
-          <div
-            className="container"
-            style={{ marginTop: "50px", marginBottom: "50px", maxWidth: "98%" }}
-          >
-            <Columns
-              className="columns is-multiline is-gapless"
-              style={{ margin: "0px" }}
-            >
-              {globalState.details &&
-                candidato[globalState.details].type === "horizontal" &&
-                candidato[globalState.details].items.map(x => (
-                  <div key={x.title} className="column ">
-                    <div className="card is-shady" style={{ height: "100%" }}>
-                      <div className=" has-text-centered" />
-                      {x.image && (
-                        <div>
-                          <IMG src={x.image} alt="error" />
-                        </div>
-                      )}
-                      <div className=" card-content">
-                        <div className=" content">
-                          <h4> {x.title} </h4>
-                          {x.contentType === "html" ?
-                            <Des dangerouslySetInnerHTML={{ __html: x.content }}></Des>
-                            :
-                            <Des > <li> {x.content}</li>  </Des>
-                          }
-                          <p>
-                            <a href="#">Learn more</a>
-                          </p>
-                        </div>
+        <div
+          className="container"
+          style={{
+            marginTop: "50px",
+            marginBottom: "50px",
+            maxWidth: "98%",
+            minHeight: "73vh",
+          }}
+        >
+          <Columns className="columns is-multiline" style={{ margin: "0px" }}>
+            {globalState.details &&
+              candidato[globalState.details].type === "horizontal" &&
+              candidato[globalState.details].items.map((x) => (
+                <div key={x.title} className="column ">
+                  <div className="card is-shady" style={{ height: "100%" }}>
+                    <div className=" has-text-centered" />
+                    {x.image && (
+                      <div>
+                        <IMG src={x.image} alt="error" />
+                      </div>
+                    )}
+                    <div className=" card-content">
+                      <div className=" content">
+                        <h4> {x.title} </h4>
+                        {x.contentType === "html" ? (
+                          <Des
+                            dangerouslySetInnerHTML={{ __html: x.content }}
+                          ></Des>
+                        ) : (
+                          <Des>
+                            {" "}
+                            <li> {x.content}</li>{" "}
+                          </Des>
+                        )}
+                        <p>
+                          <a href="#">Learn more</a>
+                        </p>
                       </div>
                     </div>
                   </div>
-                ))}
+                </div>
+              ))}
 
-              {globalState.details &&
-                candidato[globalState.details].type === "vertical" && (
-                  <div className="card is-shady" style={{ width: "100%" }}>
-                    {candidato[globalState.details].items.map(x => (
-                      <div key={x.title} className="column ">
-                        <div className=" card-content">
-                          <div className=" content">
-                            <h4> {x.title} </h4>
-                            <Des> {x.content}</Des>
-                          </div>
+            {globalState.details &&
+              candidato[globalState.details].type === "vertical" && (
+                <div className="card is-shady" style={{ width: "100%" }}>
+                  {candidato[globalState.details].items.map((x) => (
+                    <div key={x.title} className="column ">
+                      <div className=" card-content">
+                        <div className=" content">
+                          <h4> {x.title} </h4>
+                          <Des> {x.content}</Des>
                         </div>
                       </div>
-                    ))}
-                  </div>
-                )}
-            </Columns>
-          </div>
-        )}
+                    </div>
+                  ))}
+                </div>
+              )}
+          </Columns>
+        </div>
+      )}
     </React.Fragment>
   );
 };
