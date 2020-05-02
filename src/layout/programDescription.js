@@ -95,14 +95,30 @@ const Des = styled.p`
 
 const IMG = styled.img`
   max-width: 75%;
+  max-height: 90%;
+
   display: block;
   margin: 25px auto 0px auto;
   object-fit: cover;
-  @media (max-width: 900px) {
+
+  @media (min-width: 700px) {
     max-width: 50%;
   }
-  @media (max-width: 500px) {
-    max-width: 75%;
+
+  @media (min-width: 1100px) {
+    max-width: 92%;
+  }
+`;
+
+const HeaderC = styled.div`
+  max-height: 20%;
+
+  @media (min-width: 700px) {
+    max-height: 40%;
+  }
+
+  @media (min-width: 1100px) {
+    max-height: 32%;
   }
 `;
 
@@ -141,10 +157,10 @@ const ProgramDescription = (props) => {
                       height: "100%",
                     }}
                   >
-                    <div style={{}} className="  has-text-centered">
+                    <HeaderC style={{}} className="  has-text-centered">
                       {" "}
                       {x.image && <IMG src={x.image} alt="error" />}
-                    </div>
+                    </HeaderC>
 
                     <div className=" card-content" style={{ flex: "auto" }}>
                       <div className=" content">
