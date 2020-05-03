@@ -35,7 +35,7 @@ function Landing() {
 
 function Programs() {
   return (
-    <div className="Programs">
+    <div className="Programs" style={{ background: "#fafafa" }}>
       <ToastContainer />
       <Header />
       <ProgramDescription />

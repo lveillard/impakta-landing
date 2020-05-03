@@ -191,9 +191,9 @@ const Details = (props) => {
                             <li> {x.content}</li>{" "}
                           </Des>
                         )}
-                        <p>
+                        {/*<p>
                           <a href="#">Learn more</a>
-                        </p>
+                        </p>*/}
                       </div>
                     </div>
                   </div>

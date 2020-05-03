@@ -130,6 +130,7 @@ export const programs = {
         "Te ayudamos a construir un CV y acercamos tu currículum a cientos de empresas de tu sector. #formación",
       image: "img/resume.svg",
       buttonColor: "#2870ff",
+      link: "https://airtable.com/shrTLaCUKjrdL3YD4",
       id: 1,
     },
     {
@@ -138,6 +139,7 @@ export const programs = {
         "Participa en el concurso de talento OLIGYA y entra a formar parte de una de nuestras start-up y scale-up asociadas. #concurso",
       image: "img/hire.svg",
       buttonColor: "#fff067",
+      disabled: true,
       id: 2,
     },
     {
@@ -145,6 +147,7 @@ export const programs = {
       content: "¿Tienes una idea y no sabes por dónde empezar? #preincubadora",
       image: "img/idea.svg",
       buttonColor: "#c9009d",
+      disabled: true,
       id: 3,
     },
   ],

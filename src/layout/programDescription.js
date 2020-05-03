@@ -10,6 +10,15 @@ import { programs } from "../details/data";
 import { Heading, Button } from "react-bulma-components";
 import Header from "./header";
 
+const Main = styled.section`
+  @media (min-width: 700px) {
+  }
+
+  @media (min-width: 1100px) {
+    max-height: calc(100vh - 64px);
+  }
+`;
+
 const Wrapper = styled.section`
   margin: 0 auto;
   margin-top: 50px;
@@ -97,6 +106,7 @@ const Carta = styled.div`
 const Des = styled.p`
   font-size: 18px;
   font-weight: 100;
+  font-size: 2.8vh;
 `;
 
 const IMG = styled.img`
@@ -104,7 +114,7 @@ const IMG = styled.img`
   max-height: 30vh;
 
   display: block;
-  margin: 25px auto 0px auto;
+  margin: 25px auto 15px auto;
   object-fit: cover;
 
   @media (min-width: 700px) {
@@ -139,7 +149,6 @@ const Container = styled.div`
 
   @media (min-width: 1100px) {
     max-width: 1200px;
-    max-height: calc(100vh - 110px);
   }
 `;
 
@@ -225,7 +234,7 @@ const ProgramDescription = (props) => {
   return (
     <React.Fragment>
       <Header />
-      <div className="main " style={{ width: "100%" }}>
+      <Main className="main" style={{ width: "100%" }}>
         <Container
           className="container"
           style={{
@@ -263,7 +272,8 @@ const ProgramDescription = (props) => {
                       <Carta
                         color={x.buttonColor}
                         onClick={() => {
-                          if (clickBlocker === true) {
+                          if (x.disabled) {
+                          } else if (clickBlocker === true) {
                           } else if (current !== x.id) {
                             currentAdder(x.id);
                           } else {
@@ -272,7 +282,7 @@ const ProgramDescription = (props) => {
                         }}
                         className="card is-shady"
                         style={{
-                          cursor: clickBlocker && "default",
+                          cursor: (clickBlocker || x.disabled) && "default",
 
                           display: "flex",
                           flexDirection: "column",
@@ -288,9 +298,15 @@ const ProgramDescription = (props) => {
                           x.id === currentRemoved) && (
                           <div
                             className=" card-content"
-                            style={{ flex: "auto" }}
+                            style={{
+                              flex: "auto",
+                              padding: "1rem 1rem 0rem 1rem",
+                            }}
                           >
-                            <div className=" content">
+                            <div
+                              className=""
+                              style={{ padding: "1rem 1rem 0rem 1rem" }}
+                            >
                               <Heading size={5} style={{ textAlign: "center" }}>
                                 {x.title}
                               </Heading>
@@ -303,14 +319,45 @@ const ProgramDescription = (props) => {
                               ) : (
                                 <Des> {x.content} </Des>
                               )}{" "}
-                            </div>{" "}
+                            </div>
                           </div>
                         )}
+
                         {(!loading ||
                           x.id === current ||
                           x.id === currentRemoved) && (
                           <div className="cardFooter">
+                            {x.disabled && (
+                              <nav
+                                className="level is-mobile"
+                                style={{ marginBottom: "5px" }}
+                              >
+                                <div className="level-left"></div>
+                                <div className="level-right">
+                                  <div className="level-item has-text-centered">
+                                    <div>
+                                      <p
+                                        className=""
+                                        style={{
+                                          color: "red",
+                                          paddingRight: "4px",
+                                        }}
+                                      >
+                                        No disponible
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </nav>
+                            )}
                             <ButtonBot
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (x.link) {
+                                  window.open(x.link);
+                                }
+                              }}
+                              disabled={x.disabled ? true : false}
                               className="button is-fullwidth"
                               color={x.buttonColor}
                             >
@@ -325,7 +372,7 @@ const ProgramDescription = (props) => {
               ))}
           </Columns>
         </Container>
-      </div>
+      </Main>
     </React.Fragment>
   );
 };

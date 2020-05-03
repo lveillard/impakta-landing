@@ -50,7 +50,7 @@ const Nav = styled.nav`
   width: 100%;
   z-index: 2;
   display: flex;
-  font-family: "Roboto", sans-serif;
+  font-family: "Nunito", sans-serif;
   -webkit-box-pack: justify;
   justify-content: space-between;
 `;

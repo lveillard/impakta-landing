@@ -6,8 +6,9 @@ const Footer = (props) => {
   const [globalState, globalActions] = useGlobal();
 
   return (
-    <footer
+    <div
       style={{
+        padding: "3rem 1.5rem 2rem",
         background:
           "linear-gradient(185deg, rgba(255,240,103,1) 0%, rgba(255,240,105,1) 6%, rgba(255,241,110,1) 13%, rgba(255,248,188,1) 100%)",
       }}
@@ -65,7 +66,7 @@ const Footer = (props) => {
             </a>
           </p>
           <div className="control level-item">
-            <a href="https://github.com/BulmaTemplates/bulma-templates">
+            <a>
               <div className="tags has-addons">
                 <span className="tag is-dark">Impaktia</span>
                 <span className="tag is-info">Recruiting</span>
@@ -74,7 +75,7 @@ const Footer = (props) => {
           </div>
         </div>
       </div>
-    </footer>
+    </div>
   );
 };
 
